@@ -27,6 +27,7 @@ public class UserService {
             if(user.getRole()==null){
                 user.setRole(Role.ROLE_CLIENT);
             }
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
             return userRepository.save(user);
         }catch (Exception e){
             throw new UsernameUniqueViolationException(String.format("Username {%s} already registered", user.getUsername()));
@@ -64,7 +65,7 @@ public class UserService {
             throw new RuntimeException("The 'Current Password' does not match with the right password.");
         }
 
-        user.setPassword(newPassword);
+        user.setPassword(passwordEncoder.encode(newPassword));
         return user;
     }
 }

@@ -1,6 +1,5 @@
 package com.mar1a_ed.e_marketplace.dto.users;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
