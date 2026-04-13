@@ -1,8 +1,16 @@
 package com.mar1a_ed.e_marketplace.model.entity;
 
+
 import com.mar1a_ed.e_marketplace.model.enums.Role;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -21,26 +29,26 @@ public class User implements Serializable {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "username", unique = true, nullable = false)
+    @Column(name = "username", nullable = false, unique = true)
     private String username;
 
-    @Column(name = "password", nullable = false, length = 100)
+    @Column(name = "password", nullable = false, length = 25)
     private String password;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "role", nullable = false, length = 30)
+    @Column(name = "role", nullable = false)
     private Role role = Role.ROLE_CLIENT;
 
-    @Column(name = "created_date")
-    private LocalDateTime createdDate;
+    @CreatedDate
+    private LocalDateTime creationDate;
 
-    @Column(name = "modification_date")
+    @LastModifiedDate
     private LocalDateTime modificationDate;
 
-    @Column(name = "created_by")
+    @CreatedBy
     private String createdBy;
 
-    @Column(name = "modified_by")
+    @LastModifiedBy
     private String modifiedBy;
 
     @Override
@@ -53,15 +61,5 @@ public class User implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hashCode(id);
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", role=" + role +
-                '}';
     }
 }

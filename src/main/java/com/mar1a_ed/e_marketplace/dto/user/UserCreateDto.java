@@ -1,4 +1,4 @@
-package com.mar1a_ed.e_marketplace.dto.users;
+package com.mar1a_ed.e_marketplace.dto.user;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -15,12 +15,10 @@ import lombok.Setter;
 public class UserCreateDto {
 
     @NotBlank
-    @Email(message = "Enter a valid e-mail format.")
-    @Size(min = 13, max = 100)
+    @Email(message = "Insert a valid format of email.")
     private String username;
 
     @NotBlank
-    @Size(min = 8, max = 20, message = "The password must contain at least 8 characters.")
+    @Size(min = 8, max = 20, message = "The password must be at least 8 characters")
     private String password;
 }
-

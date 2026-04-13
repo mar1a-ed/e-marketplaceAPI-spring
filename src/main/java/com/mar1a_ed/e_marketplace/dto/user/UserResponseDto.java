@@ -1,4 +1,4 @@
-package com.mar1a_ed.e_marketplace.dto.users;
+package com.mar1a_ed.e_marketplace.dto.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
