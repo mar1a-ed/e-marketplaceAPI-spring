@@ -26,7 +26,7 @@ public class ProductCreateDto {
 
     @NotBlank
     @Size(min = 4, max = 50)
-    private Category category = Category.UNKNOWN;
+    private String category;
 
     @NotNull
     @Digits(integer = 10, fraction = 2)

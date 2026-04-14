@@ -1,20 +1,19 @@
 package com.mar1a_ed.e_marketplace.model.entity;
 
-
-import com.mar1a_ed.e_marketplace.model.enums.Role;
+import com.mar1a_ed.e_marketplace.model.enums.Status;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedBy;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @EntityListeners(AuditingEntityListener.class)
@@ -23,45 +22,37 @@ import java.util.Objects;
 @Getter
 @Setter
 @Entity
-@Table(name = "users")
-public class User implements Serializable {
+@Table(name = "orders")
+public class Order implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "username", nullable = false, unique = true)
-    private String username;
-
-    @Column(name = "password", nullable = false, length = 25)
-    private String password;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "role", nullable = false)
-    private Role role = Role.ROLE_CLIENT;
+    @ManyToOne
+    @JoinColumn(name = "client_id")
+    private Client client;
 
     @CreatedDate
     @Column(name = "creation_date")
     private LocalDateTime creationDate;
 
-    @LastModifiedDate
-    @Column(name = "modification_date")
-    private LocalDateTime modificationDate;
+    @Column(name = "total_price")
+    private BigDecimal totalPrice;
 
-    @CreatedBy
-    @Column(name = "created_by")
-    private String createdBy;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status_pedido")
+    private Status status = Status.RECEIVED;
 
-    @LastModifiedBy
-    @Column(name = "modified_by")
-    private String modifiedBy;
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<OrderItem> items = new ArrayList<>();
 
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return Objects.equals(id, user.id);
+        Order order = (Order) o;
+        return Objects.equals(id, order.id);
     }
 
     @Override

@@ -46,7 +46,7 @@ public class ProductController {
         return ResponseEntity.ok().body(ProductMapper.toListDto(products));
     }
 
-    @PatchMapping("/stock/unavailable")
+    @PatchMapping("/stock/unavailable/{code}")
     public ResponseEntity<Void> updateProductUnavailable(@Valid @PathVariable String code){
         productService.updateProductUnavailable(code);
         return ResponseEntity.noContent().build();

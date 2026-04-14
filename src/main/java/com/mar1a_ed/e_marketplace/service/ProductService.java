@@ -2,6 +2,7 @@ package com.mar1a_ed.e_marketplace.service;
 
 import com.mar1a_ed.e_marketplace.exception.ProductNotFoundException;
 import com.mar1a_ed.e_marketplace.model.entity.Product;
+import com.mar1a_ed.e_marketplace.model.enums.Category;
 import com.mar1a_ed.e_marketplace.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,8 +18,11 @@ public class ProductService {
 
     @Transactional
     public Product save(Product product){
-        productRepository.save(product);
-        return product;
+        if(product.getCategory() == null) {
+            product.setCategory(Category.UNKNOWN);
+        }
+
+        return productRepository.save(product);
     }
 
     @Transactional(readOnly = true)
