@@ -8,15 +8,15 @@ import java.util.stream.Collectors;
 
 public class OrderItemMapper {
 
-    public OrderItem toOrder(OrderItemCreateDto orderItemCreateDtoCreateDto){
+    public static OrderItem toOrder(OrderItemCreateDto orderItemCreateDtoCreateDto){
         return new ModelMapper().map(orderItemCreateDtoCreateDto, OrderItem.class);
     }
 
-    public OrderItemResponseDto toDto(OrderItem orderItem){
+    public static OrderItemResponseDto toDto(OrderItem orderItem){
         return new ModelMapper().map(orderItem, OrderItemResponseDto.class);
     }
 
-    public List<OrderItemResponseDto> toListDto(List<OrderItem> orderItems){
+    public static List<OrderItemResponseDto> toListDto(List<OrderItem> orderItems){
         return orderItems.stream().map(orderItem -> toDto(orderItem)).collect(Collectors.toList());
     }
 }

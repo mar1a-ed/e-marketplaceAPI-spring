@@ -1,7 +1,6 @@
 package com.mar1a_ed.e_marketplace.dto.order;
 
 import com.mar1a_ed.e_marketplace.dto.orderItem.OrderItemCreateDto;
-import com.mar1a_ed.e_marketplace.model.enums.Status;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
